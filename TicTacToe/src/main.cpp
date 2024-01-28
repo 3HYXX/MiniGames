@@ -40,6 +40,10 @@ int debugState[3][3] = {
     1, 2, 2
 };
 
+bool inputField[3][3] = { false, false, false,
+                          false, false, false,
+                          false, false, false};
+
 
 Grid gridcheck[3][3] = {Grid(0, 0), Grid(0, 1), Grid(0, 2),
                         Grid(1, 0), Grid(1, 1), Grid(1, 2),
@@ -211,6 +215,11 @@ int main(int argc, char *args[])
             {
                 CheckWin();
 
+                //Clear InputField
+                for (int i = 0; i < 9; i++)
+                {
+                    inputField[i / 3][i % 3] = false;
+                }
                 // Handle events on queue
                 while (SDL_PollEvent(&e) != 0)
                 {
@@ -222,6 +231,7 @@ int main(int argc, char *args[])
                     // Handle key presses
                     else if (e.type == SDL_KEYDOWN)
                     {
+                        //Debug
                         if (e.key.keysym.sym == SDLK_w)
                         {
                             for (int i = 0; i < 3; i++)
@@ -240,11 +250,32 @@ int main(int argc, char *args[])
                             gridcheck[i / 3][i % 3].handleEvent(&e);
                         }
                     }
-                    else
+                }
+
+                
+                //UpdateGameState
+                if(turn%2 != 0)
+                {
+                    for (int i = 0; i < 9; i++)
                     {
-                        AI();
+                        if (inputField[i / 3][i % 3])
+                        {
+                            if (gridState[i / 3][i % 3] == 0)
+                            {
+                                gridState[i / 3][i % 3] = 2;
+                                turn++;
+                                printf("AI's turn\n");
+                                break;
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    AI();
+                }
+                
+
 
                 // Render()
                 //  Clear screen
