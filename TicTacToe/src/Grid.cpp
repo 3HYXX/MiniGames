@@ -1,7 +1,5 @@
 #include "Grid.h"
 
-extern bool inputField[3][3];
-
 Grid::Grid(int x, int y)
 {
     _x = x;
@@ -15,7 +13,7 @@ void Grid::setPosition(int x, int y)
     mPosition.y = y;
 }
 
-void Grid::handleEvent(SDL_Event *e)
+bool Grid::handleEvent(SDL_Event *e)
 {
     // If mouse event happened
     if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP)
@@ -62,10 +60,7 @@ void Grid::handleEvent(SDL_Event *e)
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-                if (inputField[_x][_y] == false)
-                {
-                    inputField[_x][_y] = true;
-                }
+                return true;
                 break;
 
             case SDL_MOUSEBUTTONUP:
@@ -73,4 +68,5 @@ void Grid::handleEvent(SDL_Event *e)
             }
         }
     }
+	return false;
 }

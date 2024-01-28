@@ -17,7 +17,7 @@ class Grid
 		void setPosition( int x, int y );
 
 		//Handles mouse event
-		void handleEvent( SDL_Event* e );
+		bool handleEvent( SDL_Event* e );
 
 	private:
 		//Top left position

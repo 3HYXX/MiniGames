@@ -17,7 +17,7 @@ class Texture
         ~Texture();
 
         //Loads image at specified path
-        bool loadFromFile( std::string path );
+        bool loadFromFile(  std::string path , SDL_Renderer * renderer);
 
         //Deallocates texture
         void free();
@@ -41,7 +41,7 @@ class Texture
     private:
         //The actual hardware texture
         SDL_Texture* mTexture;
-
+        SDL_Renderer * mRenderer;
         //Image dimensions
         int mWidth;
         int mHeight;

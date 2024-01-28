@@ -18,7 +18,6 @@ end
 
 target("TicTacToe")
     set_kind("binary")
---    add_files("src/*.cpp")
-    add_files("src/main.cpp","src/Texture.cpp","src/Grid.cpp")
+    add_files("src/*.cpp")
     add_packages("libsdl", "libsdl_image")
 
